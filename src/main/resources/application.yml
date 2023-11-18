@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/moi
+    #    url: jdbc:mysql://mysql:3306/imhero  # for docker run
+    username: moi
+    password: MoiUser12!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    open-in-view: false
+    defer-datasource-initialization: true
+    hibernate.ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        hibernate.default_batch_fetch_size: 100
+  sql.init.mode: always
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - dev
+  datasource:
+    url: jdbc:mysql://mysql:3306/imhero
+    username: root
+    password:
+  jpa:
+    properties:
+      hibernate.format_sql: false
