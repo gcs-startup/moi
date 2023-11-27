@@ -14,8 +14,8 @@ public class Response<T> {
     private String resultCode;
     private T result;
 
-    public static Response<Void> error(String errorCode) {
-        return new Response<>(errorCode, null);
+    public static <T> Response<T> error(String resultCode, T message) {
+        return new Response<>(resultCode, message);
     }
 
     public static Response<Void> success() {
