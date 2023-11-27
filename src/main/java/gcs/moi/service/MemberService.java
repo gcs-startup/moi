@@ -11,8 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
-
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -29,6 +27,12 @@ public class MemberService {
         } catch (DataIntegrityViolationException e) {
             throw new MoiApplicationException(ErrorCode.MEMBER_ALREADY_JOINED);
         }
+        return MemberResponse.from(member);
+    }
+
+    public MemberResponse login(MemberRequest memberRequest) {
+        Member member = memberRepository.findMemberByToken(memberRequest.getToken())
+                .orElseThrow(() -> new MoiApplicationException(ErrorCode.MEMBER_NOT_FOUND));
         return MemberResponse.from(member);
     }
 
