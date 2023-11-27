@@ -21,4 +21,14 @@ public class Invest extends BaseEntity {
     private Member investor;
 
     private Long amount;
+
+    private Invest(Item item, Member investor, Long amount) {
+        this.item = item;
+        this.investor = investor;
+        this.amount = amount;
+    }
+
+    public static Invest of(Item item, Member investor, Long amount) {
+        return new Invest(item, investor, amount);
+    }
 }

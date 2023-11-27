@@ -1,5 +1,7 @@
 package gcs.moi.domain;
 
+import gcs.moi.config.exception.ErrorCode;
+import gcs.moi.config.exception.MoiApplicationException;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,5 +19,11 @@ public class Money extends BaseEntity {
 
     private Long amount;
 
+    public void change(long amount) {
+        if (this.amount + amount < 0) {
+            throw new MoiApplicationException(ErrorCode.MONEY_NOT_SUFFICIENT);
+        }
+        this.amount += amount;
+    }
 
 }
