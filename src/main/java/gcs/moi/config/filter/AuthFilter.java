@@ -27,7 +27,7 @@ public class AuthFilter implements Filter {
 
         boolean isMatchedURI = Arrays.asList("", "/api/v1/member/join", "/api/v1/member/login")
                 .stream()
-                .anyMatch(uri -> requestURI.startsWith(uri));
+                .anyMatch(requestURI::startsWith);
 
         if (!isMatchedURI) {
             Member member = sessionProvider.getMemberBySessionId(httpRequest.getSession().getId());
