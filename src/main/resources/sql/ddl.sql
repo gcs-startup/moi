@@ -35,7 +35,7 @@ create table item (
     amount bigint,
     is_deleted boolean,
     room_id bigint,
-    owner_member_id bigint,
+    owner_id bigint,
     created_at datetime(6),
     created_by varchar(50),
     modified_at datetime(6),
@@ -60,7 +60,7 @@ create table money (
 create table invest (
     id bigint not null auto_increment,
     item_id bigint,
-    member_id bigint,
+    investor_id bigint,
     amount bigint,
     created_at datetime(6),
     created_by varchar(50),

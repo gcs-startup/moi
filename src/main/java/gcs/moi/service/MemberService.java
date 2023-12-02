@@ -1,11 +1,13 @@
 package gcs.moi.service;
 
+import gcs.moi.auth.web.SessionProvider;
 import gcs.moi.config.exception.ErrorCode;
 import gcs.moi.config.exception.MoiApplicationException;
 import gcs.moi.domain.Member;
 import gcs.moi.dto.request.MemberRequest;
 import gcs.moi.dto.response.MemberResponse;
 import gcs.moi.repository.MemberRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final SessionProvider sessionProvider;
 
     @Transactional
     public MemberResponse save(MemberRequest memberRequest) {
@@ -30,9 +33,10 @@ public class MemberService {
         return MemberResponse.from(member);
     }
 
-    public MemberResponse login(MemberRequest memberRequest) {
+    public MemberResponse login(MemberRequest memberRequest, HttpServletRequest request) {
         Member member = memberRepository.findMemberByToken(memberRequest.getToken())
                 .orElseThrow(() -> new MoiApplicationException(ErrorCode.MEMBER_NOT_FOUND));
+        sessionProvider.setMemberSession(request.getSession().getId(), member);
         return MemberResponse.from(member);
     }
 

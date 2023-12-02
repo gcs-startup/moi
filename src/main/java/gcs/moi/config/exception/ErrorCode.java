@@ -14,7 +14,8 @@ public enum ErrorCode {
     INVEST_NOT_FOUND("IV001", "Invest not found"),
     MONEY_NOT_FOUND("MO001", "Money not found"),
     MONEY_NOT_SUFFICIENT("MO002", "Money not sufficient"),
-    BAD_REQUEST("EE001", "Bad request")
+    BAD_REQUEST("EE001", "Bad request"),
+    UNAUTHORIZED_BEHAVIOR("EE002", "Unauthorized behavior")
     ;
 
     private String resultCode;
