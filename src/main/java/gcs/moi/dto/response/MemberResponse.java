@@ -1,11 +1,9 @@
 package gcs.moi.dto.response;
 
-import gcs.moi.domain.Invest;
 import gcs.moi.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Getter
 @AllArgsConstructor

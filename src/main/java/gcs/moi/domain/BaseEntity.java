@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 public class BaseEntity implements Serializable {
 
     @CreatedBy
+    @Column(updatable = false)
     private String createdBy;
 
     @CreatedDate

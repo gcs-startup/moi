@@ -27,7 +27,7 @@ public class ItemService {
                 0L,
                 false,
                 roomService.findByIdOrElseThrow(itemRequest.getRoomId()),
-                authenticatedMember.get()));
+                authenticatedMember.orElseThrow()));
         return ItemResponse.from(item);
     }
 

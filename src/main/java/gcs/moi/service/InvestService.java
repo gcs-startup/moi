@@ -23,7 +23,7 @@ public class InvestService {
 
     @Transactional
     public InvestResponse invest(InvestRequest investRequest) {
-        Member member = authenticatedMember.get();
+        Member member = authenticatedMember.orElseThrow();
         Item item = itemService.findByIdOrElseThrow(investRequest.getItemId());
         Money money = getMoneyByRoomAndMemberOrElseThrow(item.getRoom(), member);
 

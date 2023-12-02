@@ -24,6 +24,7 @@ public class SessionProvider {
         });
     }
 
+
     public Member getMemberBySessionId(String sessionId) {
         Member member = this.sessions.get(sessionId);
         if (Objects.isNull(member)) {
