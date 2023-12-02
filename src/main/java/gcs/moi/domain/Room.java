@@ -15,4 +15,12 @@ public class Room extends BaseEntity {
     private Long id;
 
     private String title;
+
+    private Room(String title) {
+        this.title = title;
+    }
+
+    public static Room of(String title) {
+        return new Room(title);
+    }
 }
