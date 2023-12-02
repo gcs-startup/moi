@@ -39,6 +39,11 @@ public class MemberService {
         return MemberResponse.from(member);
     }
 
+    public Member findByIdOrElseThrow(Long id) {
+        return memberRepository.findById(id)
+                .orElseThrow(() -> new MoiApplicationException(ErrorCode.MEMBER_NOT_FOUND));
+    }
+
     private Member findByTokenOrElseThrow(String token) {
         return memberRepository.findMemberByToken(token)
                 .orElseThrow(() -> new MoiApplicationException(ErrorCode.MEMBER_NOT_FOUND));
