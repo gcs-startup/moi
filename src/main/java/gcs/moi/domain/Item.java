@@ -17,6 +17,7 @@ public class Item extends BaseEntity {
     private Long id;
 
     private String title;
+    private String description;
     private Long amount;
     private boolean isDeleted;
 
@@ -26,21 +27,22 @@ public class Item extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member owner;
 
-    private Item(String title, Long amount, boolean isDeleted, Room room, Member owner) {
+    private Item(String title, String description, Long amount, boolean isDeleted, Room room, Member owner) {
         this.title = title;
+        this.description = description;
         this.amount = amount;
         this.isDeleted = isDeleted;
         this.room = room;
         this.owner = owner;
     }
 
-    public static Item of(String title, Long amount, boolean isDeleted, Room room, Member owner) {
-        return new Item(title, amount, isDeleted, room, owner);
+    public static Item of(String title, String description, Long amount, boolean isDeleted, Room room, Member owner) {
+        return new Item(title, description, amount, isDeleted, room, owner);
     }
 
     public void change(long amount) {
         if (this.amount + amount < 0) {
-            new MoiApplicationException(ErrorCode.ITEM_AMOUNT_NOT_VALID);
+            throw new MoiApplicationException(ErrorCode.ITEM_AMOUNT_NOT_VALID);
         }
         this.amount += amount;
     }

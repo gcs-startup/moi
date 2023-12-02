@@ -34,10 +34,14 @@ public class MemberService {
     }
 
     public MemberResponse login(MemberRequest memberRequest, HttpServletRequest request) {
-        Member member = memberRepository.findMemberByToken(memberRequest.getToken())
-                .orElseThrow(() -> new MoiApplicationException(ErrorCode.MEMBER_NOT_FOUND));
+        Member member = findByTokenOrElseThrow(memberRequest.getToken());
         sessionProvider.setMemberSession(request.getSession().getId(), member);
         return MemberResponse.from(member);
+    }
+
+    private Member findByTokenOrElseThrow(String token) {
+        return memberRepository.findMemberByToken(token)
+                .orElseThrow(() -> new MoiApplicationException(ErrorCode.MEMBER_NOT_FOUND));
     }
 
 }

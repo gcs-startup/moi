@@ -18,7 +18,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("")
+    @PostMapping("/join")
     public Response<MemberResponse> join(@RequestBody MemberRequest memberRequest) {
         return Response.success(memberService.save(memberRequest));
     }

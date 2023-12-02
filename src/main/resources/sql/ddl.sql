@@ -32,6 +32,7 @@ create table room (
 create table item (
     id bigint not null auto_increment,
     title varchar(255),
+    description varchar(255),
     amount bigint,
     is_deleted boolean,
     room_id bigint,
