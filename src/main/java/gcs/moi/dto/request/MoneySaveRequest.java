@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemRequest {
+public class MoneySaveRequest {
 
-    private String title;
-    private String description;
     private Long roomId;
+    private Long memberId;
+    private Long amount;
+
 }

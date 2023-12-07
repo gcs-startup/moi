@@ -28,6 +28,12 @@ public class AuthFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         String requestURI = httpRequest.getRequestURI();
 
+        // OPTIONS 요청 허용
+        if ("OPTIONS".equalsIgnoreCase(httpRequest.getMethod())) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         String[] permitAll = {"/swagger-ui", "/v3/api-docs", "/api/v1/member/join", "/api/v1/member/login" };
         boolean isMatchedURI = Stream.of(permitAll)
                                      .anyMatch(requestURI::startsWith);

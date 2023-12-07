@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface MoneyRepository extends JpaRepository<Money, Long> {
 
-    Optional<Money> findByRoomAndMember(Room room, Member member);
+    Optional<Money> findByRoomIdAndMemberId(Long roomId, Long memberId);
 }
