@@ -37,8 +37,10 @@ public class InvestService {
         Money money = getMoneyByRoomAndMemberOrElseThrow(item.getRoom(), member);
 
         Invest invest = investRepository.save(Invest.of(item, member, investRequest.getAmount()));
-        item.change(investRequest.getAmount());
-        money.change(-investRequest.getAmount());
+        itemRepository.updateItemAmount(item.getId(), investRequest.getAmount());
+        moneyRepository.updateMoneyAmount(money.getId(), -investRequest.getAmount());
+//        item.change(investRequest.getAmount());
+//        money.change(-investRequest.getAmount());
 
         return InvestResponse.from(invest);
     }
